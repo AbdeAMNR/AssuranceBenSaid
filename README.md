@@ -22,19 +22,14 @@ Please do not post issues here that are related to your own code. If you clone T
 ## Usage
 ...
 
-### Env Variables
 
+#### Setup MySQL database
 ```
-PORT = 5000
-```
-
-### Install Dependencies (frontend & backend)
-
-```
-nothing
+### MySQL database
+Create a database, tables and triggers, and dummy data by configuring MySQL and running the SQL script provided in "a/b/c."
 ```
 
-### Run
+#### Run
 
 ```
 # Compile and run
@@ -49,7 +44,7 @@ admin@example.com (Admin)
 
 ## License
 
-Copyright (c) 2021 Abderrahim AMANAR
+### Copyright (c) 2021 Abderrahim AMANAR
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
