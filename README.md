@@ -8,6 +8,7 @@
 ## Features
 
 - Manage customers
+- Manage vehicles
 - Manage the receipts made.
 - User profile
 - Analyze everyday activities with the use of a dashboard.
