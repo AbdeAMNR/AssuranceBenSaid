@@ -1,7 +1,7 @@
 
 # Insurance offers and services management system.
 
-> Desktop management application for insurance agency built with JAVA Swing and MySQL
+> Desktop management application for insurance agency built with JAVA Swing, AWT and MySQL
 
 ![screenshot](https://github.com/AbdeAMNR/AssuranceBenSaid/blob/master/Interfaces%20Graphiques/Picture2.jpg)
 
@@ -20,7 +20,16 @@
 Please do not post issues here that are related to your own code. If you clone THIS repo and there are issues, then you can submit
 
 ## Usage
-...
+
+
+### Env Variables
+Create a .env file in then root and add the following
+
+```
+DB_URL = jdbc:mysql://localhost:3306/agenceassurance
+DB_PORT = 5000
+DB_PASSWORD = amanar
+```
 
 
 #### Setup MySQL database
