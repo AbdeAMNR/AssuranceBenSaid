@@ -3,7 +3,7 @@
 
 > Desktop management application for insurance agency built with JAVA Swing, AWT and MySQL
 
-## Gif Duration (3 minutes)
+### Gif Duration (3 minutes)
 
 ![screenshot](https://github.com/AbdeAMNR/AssuranceBenSaid/blob/master/Interfaces%20Graphiques/demo_app.gif)
 
