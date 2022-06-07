@@ -28,7 +28,6 @@ Registration key:
 HRYASU-HRYASU-HRYASU-HRYASU-HRYASU
 ```
 ### Env Variables
-Create a .env file in then root and add the following
 
 ```
 DB_URL = jdbc:mysql://localhost:3306/agenceassurance
@@ -40,10 +39,12 @@ DB_PASSWORD = amanar
 #### Setup MySQL database
 ```
 ### MySQL database
-Create a database, tables and triggers, and dummy data by configuring MySQL and running the SQL script provided in "a/b/c."
+Create a database, tables and triggers, and dummy data 
+by configuring MySQL and running the SQL script 
+provided in "database/insuranceAgencyDB v2.sql"
+
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'amanar';
 Then run this query to refresh privileges:
-
 flush privileges;
 
 
@@ -56,9 +57,8 @@ flush privileges;
 make sure Database instance is runing
 
 #  Sample User Logins
-admin@example.com (Admin)
-123456
-
+username: a
+password: a
 ```
 
 
