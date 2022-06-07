@@ -155,7 +155,7 @@ public class AboutFrame extends javax.swing.JPanel {
         jLabel3.setBackground(new java.awt.Color(231, 71, 0));
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("©2017 Designed and Developed by Abderrahim AMANAR");
+        jLabel3.setText("©2021 Designed and Developed by Abderrahim AMANAR");
         jLabel3.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
             public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
                 jLabel3AncestorMoved(evt);

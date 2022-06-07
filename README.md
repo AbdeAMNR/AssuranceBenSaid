@@ -7,13 +7,14 @@
 
 ## Features
 
-- Manage customers
-- Manage vehicles
+- Manage customers.
+- Manage vehicles.
 - Manage the receipts made.
-- User profile
+- System for registering users and assigning roles.
+- Application registration for the purpose of preventing its unauthorized use.
 - Analyze everyday activities with the use of a dashboard.
 - Printing reports using JasperReports.
-- Database creation using SQL script (tables and dummy data)
+- Database creation using SQL script (tables and dummy data).
 
 ## Note on Issues
 
@@ -21,13 +22,17 @@ Please do not post issues here that are related to your own code. If you clone T
 
 ## Usage
 
-
+###
+```
+Registration key:
+HRYASU-HRYASU-HRYASU-HRYASU-HRYASU
+```
 ### Env Variables
 Create a .env file in then root and add the following
 
 ```
 DB_URL = jdbc:mysql://localhost:3306/agenceassurance
-DB_PORT = 5000
+DB_USER = root
 DB_PASSWORD = amanar
 ```
 
@@ -36,6 +41,12 @@ DB_PASSWORD = amanar
 ```
 ### MySQL database
 Create a database, tables and triggers, and dummy data by configuring MySQL and running the SQL script provided in "a/b/c."
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'amanar';
+Then run this query to refresh privileges:
+
+flush privileges;
+
+
 ```
 
 #### Run

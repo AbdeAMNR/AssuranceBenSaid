@@ -1,0 +1,28 @@
+SELECT * from client c JOIN quittance q ON c.cin=q.cin 
+						JOIN fractionnement f ON q.numQuitt=f.numQuitt
+                        JOIN attestation a ON f.idAttest=a.idAttest
+-----------------------------------------------------------------------------------
+SELECT *
+FROM client c
+  JOIN vehicle v ON c.cin = v.cin
+  JOIN usages u ON v.idUsage = u.idUsage
+  JOIN quittance q ON c.cin = q.cin
+  JOIN fractionnement f ON q.numQuitt = f.numQuitt
+  JOIN attestation a ON f.idAttest = a.idAttest
+
+-------------------------------------------------------------------------------------
+
+SELECT c.cin,c.nomComplet,c.teleClient,
+		u.libaleUsage, 
+q.dateQuitt,q.primeReele,q.reglement,q.credit,q.perte,q.rglmentTotale,
+a.typeAttest,
+  f.datePremiereFrac,f.fracOne,f.dateDeuxiemeFrac,f.fracTwo,f.dateTroisiemeFrac,f.fracThree,f.dateQuatriemeFrac,f.fracFour
+FROM client c
+JOIN vehicle v ON c.cin = v.cin
+JOIN usages u ON v.idUsage = u.idUsage
+JOIN quittance q ON c.cin = q.cin
+JOIN fractionnement f ON q.numQuitt = f.numQuitt
+JOIN attestation a ON f.idAttest = a.idAttest
+-------------------------------------------
+ pnlHome.setBackground(Color.decode("#E74700"));
+   pnlHome.setBackground(Color.decode("#5CB0CA"));

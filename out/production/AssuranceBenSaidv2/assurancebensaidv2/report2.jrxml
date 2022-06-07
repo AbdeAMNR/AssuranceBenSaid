@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d5588a14-0c48-402c-aec0-32aa74bfbd55">
+	<property name="ireport.zoom" value="1.331000000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="PieChartDataset" uuid="6b96b5fe-6e95-4f39-9721-67fad0a0539a"/>
+	<queryString>
+		<![CDATA[SELECT
+  c.nomComplet,
+  u.libaleUsage,
+  q.dateQuitt,
+  q.primeReele,
+  q.reglement,
+  q.perte,
+  a.typeAttest,
+  CONCAT(f.datePremiereFrac, " | ", f.fracOne)    AS '1 Fractionnement',
+  CONCAT(f.dateDeuxiemeFrac, " | ", f.fracTwo)    AS '2 Fractionnement',
+  CONCAT(f.dateTroisiemeFrac, " | ", f.fracThree) AS '3 Fractionnement',
+  CONCAT(f.dateQuatriemeFrac, " | ", f.fracFour)  AS '4 Fractionnement',
+  q.resiliation,
+  q.quittAnnuler
+FROM client c
+  JOIN vehicle v ON c.cin = v.cin
+  JOIN usages u ON v.idUsage = u.idUsage
+  JOIN quittance q ON c.cin = q.cin
+  JOIN fractionnement f ON q.numQuitt = f.numQuitt
+  JOIN attestation a ON f.idAttest = a.idAttest
+WHERE q.dateQuitt = curdate()
+UNION ALL
+SELECT
+  ""              AS nomComplet,
+  ""              AS libaleUsage,
+  "Total"         AS Total,
+  SUM(primeReele) AS primeReele,
+  SUM(reglement)  AS reglement,
+  SUM(perte)      AS perte,
+  ""              AS typeAttest,
+  ""              AS '1 Fractionnement',
+  ""              AS '2 Fractionnement',
+  ""              AS '3 Fractionnement',
+  ""              AS '4 Fractionnement',
+  ""              AS resiliation,
+  ""              AS quittAnnuler
+FROM quittance
+WHERE dateQuitt = curdate();]]>
+	</queryString>
+	<field name="nomComplet" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="libaleUsage" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dateQuitt" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="primeReele" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="reglement" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="perte" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="typeAttest" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="1 Fractionnement" class="java.lang.String"/>
+	<field name="2 Fractionnement" class="java.lang.String"/>
+	<field name="3 Fractionnement" class="java.lang.String"/>
+	<field name="4 Fractionnement" class="java.lang.String"/>
+	<field name="resiliation" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="quittAnnuler" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band height="555" splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="94" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-10" y="0" width="812" height="65" forecolor="#2595B8" backcolor="#2595B8" uuid="cb1c4abc-9120-43a9-bbcc-8beab2663513"/>
+				<staticText>
+					<reportElement style="SubTitle" x="2" y="0" width="444" height="65" forecolor="#FFFFFF" uuid="b436134b-199f-4a75-9c1e-4fd96a17e1c8"/>
+					<textElement textAlignment="Left">
+						<font size="54" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Assurance Ben Said]]></text>
+				</staticText>
+			</frame>
+			<staticText>
+				<reportElement style="SubTitle" x="566" y="24" width="236" height="41" forecolor="#FFFFFF" uuid="fcfc4d0a-8118-417b-a71e-515c4a4be566"/>
+				<textElement textAlignment="Left">
+					<font size="24" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Quittances d'aujourd'hui]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="14" splitType="Stretch">
+			<frame>
+				<reportElement x="-10" y="0" width="812" height="14" uuid="8acc3833-3e4e-4469-851f-8d8bf32a685f"/>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="0" y="0" width="82" height="14" forecolor="#000000" uuid="abe88b0f-04ba-4085-9799-8954066891b4"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Nom complet]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="82" y="0" width="44" height="14" forecolor="#000000" uuid="65595dab-037e-40f4-93ab-a5494a9dcab7"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica"/>
+						<paragraph spacingAfter="5"/>
+					</textElement>
+					<text><![CDATA[Usage]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="126" y="0" width="70" height="14" forecolor="#000000" uuid="6349188c-294e-4459-b240-dfe6a8eb0a48"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Date]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="196" y="0" width="35" height="14" forecolor="#000000" uuid="81d7a733-215a-4934-880e-5bb97c0361ae"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Prime]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="231" y="0" width="53" height="14" forecolor="#000000" uuid="ffd17bba-93a0-4f25-aa41-dcb52d44ea3a"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Reglement]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="284" y="0" width="35" height="14" forecolor="#000000" uuid="b2cb9818-2102-4460-bcae-3eb32ce803d4"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Perte]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="319" y="0" width="57" height="14" forecolor="#000000" uuid="664d547a-82cd-4884-a734-c9630624acf3"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Attestation]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="376" y="0" width="80" height="14" forecolor="#000000" uuid="93e51833-a73a-4730-9c42-d148c61f3563"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[1 Fraction]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="456" y="0" width="80" height="14" forecolor="#000000" uuid="1774a50a-11ed-45f0-90a0-3be89c0b4e48"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[2 Fraction]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="536" y="0" width="80" height="14" forecolor="#000000" uuid="3733e201-c410-4822-a70a-9dd8ef88f38a"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[3 Fraction]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="616" y="0" width="80" height="14" forecolor="#000000" uuid="a8d51b80-6107-4326-82c6-1d3df2dfc03f"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[4 Fraction]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="696" y="0" width="58" height="14" forecolor="#000000" uuid="748ef090-a742-46c2-9886-ee8806f5f8c6"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Resiliation]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="753" y="0" width="59" height="14" forecolor="#000000" uuid="1afa2938-501d-4915-9a6c-d2229b7e3a0c"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Annuler]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="-10" y="14" width="812" height="1" uuid="9b80ba75-f3c4-4abd-9970-d2de1e89443f"/>
+			</line>
+			<frame>
+				<reportElement x="-10" y="0" width="812" height="14" uuid="8956db4e-1b71-4e22-8cb7-94d9a2caa495"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="0" y="0" width="82" height="14" uuid="fe1ccb10-a725-4100-b573-75d0db9174a1"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nomComplet}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="82" y="0" width="44" height="14" uuid="11c445b3-f362-42ee-898d-503a6f380c8c"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{libaleUsage}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="126" y="0" width="70" height="14" uuid="67bb08ec-1e19-43de-ba52-07697c2ee77e"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dateQuitt}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="196" y="0" width="35" height="14" uuid="759bb8e2-5fb2-4a62-8cc6-b8ad87c1fbde"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{primeReele}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="231" y="0" width="53" height="14" uuid="981d58e9-f417-4175-b1ba-22c835be8377"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{reglement}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="284" y="0" width="35" height="14" uuid="c8c462f0-2725-43a9-b9d1-e54c1931f99e"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{perte}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="319" y="0" width="57" height="14" uuid="8abeae27-cc6b-43ee-ad39-51b0d4aa92f1"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{typeAttest}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="376" y="0" width="80" height="14" uuid="3655cd0c-05e5-4fa7-a588-fd95084d4ac4"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{1 Fractionnement}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="456" y="0" width="80" height="14" uuid="eb1cf457-4ccb-4469-bfe3-a99547c33991"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{2 Fractionnement}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="536" y="0" width="80" height="14" uuid="7636d52a-ec3b-4cc6-8127-5ce407aca2ba"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{3 Fractionnement}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="616" y="0" width="80" height="14" uuid="4834dd9b-e14e-4dc3-b90c-71bb3739d026"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{4 Fractionnement}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="696" y="0" width="58" height="14" uuid="e9b7ad3d-c48f-49e3-829e-0ab068f6298b"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{resiliation}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="753" y="0" width="59" height="14" uuid="7c4a7f41-f780-4c8e-8dbe-28fd06cfb639"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{quittAnnuler}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="538b058a-1444-456a-9c62-68282730beac"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="16" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-10" y="0" width="812" height="16" forecolor="#D0B48E" backcolor="#006699" uuid="5344b684-1651-48de-81a5-d0f78112c3c4"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="753" y="0" width="40" height="16" forecolor="#FFFFFF" uuid="16d39559-3352-43eb-b397-58c14068a311"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="673" y="0" width="80" height="16" forecolor="#FFFFFF" uuid="3aff6209-7d04-406e-8c38-021025639723"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="0" width="197" height="16" forecolor="#FFFFFF" uuid="8b87b6d5-a3ed-4de2-bd3a-fdf49fc8139b"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

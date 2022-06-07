@@ -98,7 +98,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("©2017 Designed and Developed by Abderrahim AMANAR");
+        jLabel3.setText("©2021 Designed and Developed by Abderrahim AMANAR");
 
         pnlSignIn.setBackground(new java.awt.Color(37, 149, 184));
 
@@ -621,7 +621,7 @@ public class Login extends javax.swing.JFrame {
                         UserInsc = UserInsc.replaceAll("\'", "''");
                     }
                     try {
-                        String rq = "SELECT * FROM logininfo WHERE user= ? AND pass= ? ";
+                        String rq = "SELECT * FROM logininfo WHERE userName= ? AND pass= ? ";
                         System.out.println(rq);
                         PreparedStatement stmt = cnx.getCnx().prepareStatement(rq);
                         stmt.setString(1, this.txtUser.getText().trim());
@@ -632,7 +632,7 @@ public class Login extends javax.swing.JFrame {
                         } else {
                             /*===========Inscription Etudiant===========*/
                             if (SecurityFunc.isNullOrWhiteSpace(GrantedKey)) {
-                                String rqt = "INSERT INTO logininfo  (user, pass, usertype) "
+                                String rqt = "INSERT INTO logininfo  (userName, pass, usertype) "
                                         + " VALUES('" + UserInsc + "','" + PassInsc + "','Editeur')";
                                 System.out.println(">abde: checkin' query \n" + rqt);
                                 cnx.update(rqt);
@@ -640,7 +640,7 @@ public class Login extends javax.swing.JFrame {
                             } else {
                                 /*===========Inscription Administrator===========*/
                                 if (GrantedKey.equals("Granted")) {
-                                    cnx.update("INSERT INTO logininfo  (user, pass, usertype, GrantedKey) "
+                                    cnx.update("INSERT INTO logininfo  (userName, pass, usertype, GrantedKey) "
                                             + " VALUES('" + UserInsc + "','" + PassInsc + "','Administrateur','Granted')");
                                     JOptionPane.showMessageDialog(null, "Inscription est bien effectuer ", "Nivaux de l’autorité: Administrateur ", JOptionPane.INFORMATION_MESSAGE);
                                 } else {

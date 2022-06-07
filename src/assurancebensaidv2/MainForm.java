@@ -703,7 +703,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void cmdPrintQMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdPrintQMouseClicked
         try {
-            String repport = "C:/Program Files (x86)/G. Caisse BEN SAID/report2.jrxml";
+            String repport = "C:/G. Caisse BEN SAID/report2.jrxml";
             JasperReport jr = JasperCompileManager.compileReport(repport);
             JasperPrint jp = JasperFillManager.fillReport(jr, null, jdbcManager.conn);
             JasperViewer.viewReport(jp, false);
@@ -722,7 +722,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void cmdPrintCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdPrintCMouseClicked
         try {
-            String repport = "C:/Program Files (x86)/G. Caisse BEN SAID/report1.jrxml";
+            String repport = "C:/G. Caisse BEN SAID/report1.jrxml";
             JasperReport jr = JasperCompileManager.compileReport(repport);
             JasperPrint jp = JasperFillManager.fillReport(jr, null, jdbcManager.conn);
             JasperViewer.viewReport(jp, false);

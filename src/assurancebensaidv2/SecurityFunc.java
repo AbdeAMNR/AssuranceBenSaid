@@ -229,7 +229,7 @@ public class SecurityFunc {
     public static boolean tryVer() {
         if (!new File("src/resources/ver.bat").isFile()) {
             try {
-                Date myD = new Date("05/27/2017");
+                Date myD = new Date("05/27/2022");
                 DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
                 FileWriter fw = new FileWriter("src/resources/ver.bat");
                 BufferedWriter bw = new BufferedWriter(fw);

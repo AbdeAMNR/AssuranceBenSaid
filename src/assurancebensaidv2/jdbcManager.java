@@ -35,7 +35,7 @@ public class jdbcManager {
         }
         //===================================================================
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/agenceassurance", "amanar", "12345");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/agenceassurance", "root", "amanar");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             //  javax.swing.JOptionPane.showMessageDialog(null, "Erreur Connection Base de donnée", "Etat de L'operation", javax.swing.JOptionPane.INFORMATION_MESSAGE);
